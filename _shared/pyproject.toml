@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "30apps-shared"
+version = "0.1.0"
+description = "30-apps 공유 인프라·payments·auth·email·landing·legal templates (Sandi Metz AHA 5 사용처 승격)"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "조기흠" }]
+requires-python = ">=3.11"
+keywords = ["shared", "30-apps", "payments", "auth", "korean"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Natural Language :: Korean",
+]
+dependencies = []
+
+[project.optional-dependencies]
+streamlit = ["streamlit>=1.30"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.setuptools.packages.find]
+include = ["payments*", "auth*", "email*", "landing*"]
+exclude = ["legal_templates*", "tests*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501"]

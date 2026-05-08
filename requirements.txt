@@ -1,0 +1,8 @@
+# freelancer-tax-helper requirements (Streamlit Cloud 정합)
+# Cycle 168 분리·외부 발사 검증 단계
+
+streamlit==1.39.0
+
+# 선택 (BYOK·향후 Phase 3)
+# anthropic==0.39.0
+# resend==2.4.0
