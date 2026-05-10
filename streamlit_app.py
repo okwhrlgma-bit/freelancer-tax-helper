@@ -7,6 +7,7 @@ ADR 0058 배포 가능 (시장 90·캐시카우 100·벤치마크 삼쩜삼·Q5 
 
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -50,9 +51,16 @@ except ImportError:
     SHARED_ONBOARDING_AVAILABLE = False
 
 st.set_page_config(
-    page_title="프리랜서 종소세 환급 추정기 — offline·MIT",
+    page_title="프리랜서 종소세 환급 계산기·단순경비율·삼쩜삼 변형·MIT",
     page_icon="💼",
     layout="centered",
+    menu_items={
+        "About": (
+            "프리랜서 종소세 환급 추정기·디자이너·개발자·번역가·강사·작가·"
+            "유튜버·블로거·외주 등 사업소득자·5월 종합소득세 신고 대비·"
+            "단순경비율 vs 직접 비용 자동 비교·offline·MIT·헌법 §14."
+        ),
+    },
 )
 
 st.markdown(
@@ -263,9 +271,30 @@ if SHARED_LANDING_AVAILABLE:
         "삼쩜삼 (성공 보수 18.7%) 변형 = MIT 무료·offline·헌법 §14 정합."
     )
     render_disclaimer_footer(
-        github_url="https://github.com/okwhrlgma-bit/library",
+        github_url="https://github.com/okwhrlgma-bit/freelancer-tax-helper",
         contact_email="okwhrlgma@gmail.com",
     )
+    # Cycle 192: 후원·피드백 통합 (PO 마스터 프롬프트 정합·env·HTTPS 분기)
+    try:
+        from landing.streamlit_helper import render_donation_button, render_feedback_link
+
+        render_donation_button(donation_url=os.environ.get("DONATION_URL", ""))
+        render_feedback_link(
+            feedback_url="https://github.com/okwhrlgma-bit/freelancer-tax-helper/issues",
+            feedback_email="okwhrlgma@gmail.com",
+        )
+    except ImportError:
+        pass
+    # Cycle 192: UTM 추적 (st.query_params·session_state 보존)
+    try:
+        from analytics import label_utm_source_kr, parse_utm_source
+
+        utm = parse_utm_source(dict(st.query_params))
+        if utm:
+            st.session_state.setdefault("utm_source", utm)
+            st.caption(f"🧭 유입: {label_utm_source_kr(utm)}")
+    except ImportError:
+        pass
 else:
     st.caption(
         "🔒 데이터 = 사용자 컴퓨터·🆓 MIT·📌 면책 = 자기 측정·세무사 자문 X·📜 환불 7일"
