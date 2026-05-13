@@ -1,0 +1,37 @@
+{
+  "name": "프리랜서 종소세 환급",
+  "short_name": "종소세환급",
+  "description": "프리랜서·디자이너·개발자·번역가 종합소득세 환급 추정·9 카테고리 자동·누락 경고·환급액 즉시 추정.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "categories": [
+    "finance",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

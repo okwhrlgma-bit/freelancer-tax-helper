@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="630"
+     viewBox="0 0 1024 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#1e40af" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="630" fill="url(#bg)"/>
+  <rect x="40" y="40" width="944" height="550" fill="white" fill-opacity="0.05"
+        stroke="white" stroke-opacity="0.2" stroke-width="2" rx="20"/>
+  <text x="80" y="180" fill="white" font-family="Pretendard, system-ui, sans-serif"
+        font-size="32" font-weight="700" opacity="0.85">
+    프리랜서 종소세 환급 도우미
+  </text>
+  <text x="80" y="280" fill="white" font-family="Pretendard, system-ui, sans-serif"
+        font-size="48" font-weight="700">
+    <tspan x="80" dy="0">프리랜서 종소세 환급 — 30분 환급 추정·무료</tspan>
+  </text>
+  <text x="80" y="400" fill="white" font-family="Pretendard, system-ui, sans-serif"
+        font-size="22" font-weight="400" opacity="0.9">
+    <tspan x="80" dy="0">유튜버·강사·배달·디자이너·번역가 60초 환급 계산·삼쩜삼 빈 슬롯·세무사법 합법·헌법 §14</tspan>
+  </text>
+  <text x="80" y="540" fill="white" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="500" opacity="0.7">
+    freelancer-tax-helper.vercel.app
+  </text>
+</svg>

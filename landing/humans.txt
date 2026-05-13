@@ -1,0 +1,13 @@
+/* TEAM */
+제품 책임자: 1인 메이커 (사서 출신·도서관 SaaS 포트폴리오)
+Contact: ok981121@naver.com
+
+/* THANKS */
+고객님께서 보내주신 피드백·후기·신뢰가 이 서비스를 키웁니다.
+
+/* SITE */
+Last update: 2026/05/13
+Language: 한국어 (Korean)
+Doctype: HTML5
+IDE: Claude Code
+Standards: KWCAG 2.2 AA·PIPA·전자상거래법

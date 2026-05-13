@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>페이지를 찾을 수 없습니다 — 프리랜서 종소세 환급</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1e40af">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+* { box-sizing:border-box; }
+body {
+  margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  font-family:'Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;
+  background:linear-gradient(135deg,#f8fafc 0%,#eef2ff 100%);
+  color:#0f172a; padding:24px;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom));
+}
+.box {
+  max-width:560px; width:100%; text-align:center;
+  background:#fff; border:1px solid #e2e8f0; border-radius:20px;
+  padding:48px 28px;
+  box-shadow:0 10px 30px -10px rgba(15,23,42,.15);
+}
+.code { font-size:64px; font-weight:800; color:#1e40af; margin:0 0 8px; letter-spacing:-0.02em; line-height:1; }
+h1 { font-size:22px; margin:8px 0 12px; font-weight:700; }
+p { color:#475569; margin:0 0 24px; line-height:1.7; font-size:15px; }
+.btn {
+  display:inline-block; min-height:48px; padding:14px 28px;
+  background:#1e40af; color:#fff; text-decoration:none;
+  border-radius:10px; font-weight:700; font-size:15px;
+  transition:transform .15s ease;
+}
+.btn:hover { transform:translateY(-1px); }
+.btn.secondary { background:#fff; color:#1e40af; border:1px solid #1e40af; margin-left:8px; }
+.hint { color:#94a3b8; font-size:13px; margin-top:24px; }
+@media (max-width:480px) {
+  .code { font-size:48px; }
+  h1 { font-size:18px; }
+  .btn.secondary { margin-left:0; margin-top:8px; }
+}
+</style>
+</head>
+<body>
+<main class="box" role="alert" aria-labelledby="err-title">
+  <div class="code" aria-hidden="true">404</div>
+  <h1 id="err-title">페이지를 찾을 수 없습니다</h1>
+  <p>주소가 변경되었거나 페이지가 삭제되었을 수 있습니다. 메인 페이지로 이동하시거나, 검색을 통해 원하시는 정보를 찾아보세요.</p>
+  <a class="btn" href="/">홈으로 돌아가기</a>
+  <a class="btn secondary" href="mailto:ok981121@naver.com">문의하기</a>
+  <p class="hint">문제가 반복되면 알려주세요. 빠르게 확인해드립니다.</p>
+</main>
+</body>
+</html>

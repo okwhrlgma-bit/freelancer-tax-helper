@@ -1,16 +1,11 @@
-User-agent: ClaudeBot
+# robots.txt for 프리랜서 종소세 환급 도우미
+# Cycle 1361·seo_assets_inject·2026-05-11
+
+User-agent: *
 Allow: /
 
-User-agent: Claude-User
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
+# AI 답변 엔진·LLM 봇 명시 허용 (AEO·`feedback_partnership_revenue_focus_2026_05_11`)
 User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
@@ -19,10 +14,16 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Perplexity-User
+User-agent: ClaudeBot
 Allow: /
 
-User-agent: *
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
 Allow: /
 
 Sitemap: https://freelancer-tax-helper.vercel.app/sitemap.xml

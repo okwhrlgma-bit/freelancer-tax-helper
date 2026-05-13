@@ -1,0 +1,22 @@
+{
+  "name": "프리랜서 종소세 환급 도우미",
+  "short_name": "프리랜서 종소세 환급 ",
+  "description": "유튜버·강사·배달·디자이너·번역가 60초 환급 계산·삼쩜삼 빈 슬롯·세무사법 합법·헌법 §14",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "lang": "ko-KR",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/og.svg",
+      "sizes": "1024x630",
+      "type": "image/svg+xml"
+    }
+  ]
+}

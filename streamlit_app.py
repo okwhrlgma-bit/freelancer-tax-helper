@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import os
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
@@ -50,6 +51,64 @@ try:
 except ImportError:
     SHARED_ONBOARDING_AVAILABLE = False
 
+# Agent G·Cycle 1362·일괄 1·_shared 핵심 모듈 강제 import (신규 배선)
+try:
+    from payments import calculate_fees, verify_payment_amount  # type: ignore[import-not-found]
+    from auth import (  # type: ignore[import-not-found]
+        AuditChain,
+        LoginRateLimiter,
+        mask_email_for_display,
+        validate_password_strength,
+    )
+    from email_helper import build_receipt_message  # type: ignore[import-not-found]
+
+    SHARED_CORE_AVAILABLE = True
+except ImportError as _shared_import_err:
+    import logging as _logging
+    _logging.getLogger(__name__).warning(
+        "_shared 핵심 모듈 일부 로드 실패 (degraded mode): %s", _shared_import_err
+    )
+    SHARED_CORE_AVAILABLE = False
+
+# Agent G·Cycle 1362·일괄 4·Sentry init (env SENTRY_DSN 설정 시만)
+_SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
+if _SENTRY_DSN:
+    try:
+        import sentry_sdk  # type: ignore[import-not-found]
+
+        sentry_sdk.init(
+            dsn=_SENTRY_DSN,
+            traces_sample_rate=0.1,
+            profiles_sample_rate=0.1,
+            environment=os.environ.get("ENV", "production"),
+            release=os.environ.get("RELEASE", "v0.1.0"),
+        )
+    except ImportError:
+        pass  # sentry_sdk 미설치·degraded mode
+
+# Agent G·Cycle 1362·일괄 5·analytics (PostHog 옵션·GA4 = landing/index.html 측)
+_POSTHOG_KEY = os.environ.get("POSTHOG_API_KEY", "")
+try:
+    if _POSTHOG_KEY:
+        import posthog  # type: ignore[import-not-found]
+        posthog.api_key = _POSTHOG_KEY
+        POSTHOG_AVAILABLE = True
+    else:
+        POSTHOG_AVAILABLE = False
+except ImportError:
+    POSTHOG_AVAILABLE = False
+
+
+def track_event(event_name: str, properties: dict | None = None, distinct_id: str = "anonymous") -> None:
+    """analytics 이벤트 트래킹 (PostHog·env 미설정 시 no-op)."""
+    if not POSTHOG_AVAILABLE:
+        return
+    try:
+        posthog.capture(distinct_id, event_name, properties or {})  # type: ignore[name-defined]
+    except Exception:  # noqa: BLE001 (분석 실패 = UX 영향 X)
+        pass
+
+
 st.set_page_config(
     page_title="프리랜서 종소세 환급 계산기·단순경비율·삼쩜삼 변형·MIT",
     page_icon="💼",
@@ -88,7 +147,19 @@ if SHARED_LANDING_AVAILABLE:
             "🚀 14일 무료 체험 시작",
             sublabel="가입 X·즉시 사용·결제 = PortOne 활성 시 (PO 결정 시)",
         ):
-            st.info("✅ 가입 폼 = 다음 cycle 활성 (PO 외부 작업 1시간 후)")
+            # 모의 체험 활성 (session_state·offline·결제 없음)
+            if "trial_started" not in st.session_state:
+                st.session_state.trial_started = True
+                st.session_state.trial_start_date = datetime.now().isoformat()
+                expire = (datetime.now() + timedelta(days=14)).strftime("%Y-%m-%d")
+                st.success(
+                    f"✅ 14일 무료 체험이 시작되었습니다. 만료일: {expire}·"
+                    f"기능 100% 사용 가능·결제 X·계정 가입 X."
+                )
+            else:
+                start = datetime.fromisoformat(st.session_state.trial_start_date)
+                expire = (start + timedelta(days=14)).strftime("%Y-%m-%d")
+                st.info(f"이미 체험 중입니다. 만료일: {expire}")
         render_pricing_grid([
             {
                 "name": "Free",
@@ -177,7 +248,18 @@ if submitted and vendor:
         st.session_state.receipts.append(r)
         st.success(f"✅ 추가: {r.vendor} ₩{r.amount:,} ({r.category})")
     except ValueError as e:
-        st.error(f"입력 오류: {e}")
+        # 사용자에게 친절한 한국어 메시지·내부 상세는 로그
+        st.error(
+            "⚠️ 영수증 입력이 잘못됐습니다. 금액·날짜·가게명을 다시 확인해주세요."
+        )
+        import logging
+
+        logging.warning("receipt validation failed: %s", e)
+    except Exception:
+        st.error("⚠️ 오류가 발생했습니다. 다시 시도해주세요.")
+        import logging
+
+        logging.exception("unexpected receipt error")
 
 # 자동 분류 옵션
 if st.session_state.receipts and st.button("🤖 vendor → 카테고리 자동 분류"):

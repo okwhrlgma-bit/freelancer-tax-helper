@@ -1,0 +1,6 @@
+Contact: mailto:ok981121@naver.com
+Expires: 2027-05-13T14:25:23.000Z
+Preferred-Languages: ko, en
+Canonical: https://freelancer-tax-helper.vercel.app/.well-known/security.txt
+# 보안 취약점 발견 시 위 이메일로 비공개 보고 부탁드립니다.
+# 24시간 내 회신·신속한 패치를 약속드립니다.
